@@ -141,9 +141,14 @@ promptUser()
     .then(portfolioData => {
         const pageHTML = generatePage(portfolioData);
 
-        fs.writeFile('index.html', pageHTML, err => {
+        fs.writeFile('./dist/index.html', pageHTML, err => {
             if (err) throw new Error(err);
 
             console.log('Portfolio complete! Check out index.html to see the output!');
+
+            fs.copyFile('./src/style.css', './dist/style.css', err => {
+                if (err) throw new Error(err);
+                console.log('Style sheet copied successfully!');
+            })
         });
     });
